@@ -1,38 +1,33 @@
 <?php
 
+require_once PLUGIN_PATH . 'inc/Api/SettingsApi.php';
+
 class Admin extends BaseController {
-    /**
-     * Register all actions and filters to WordPress hooks.
+	public SettingsApi $settings;
+	public array $pages;
+
+	public function __construct() {
+		$this->settings = new SettingsApi();
+
+		$this->pages = array(
+			array(
+				'page_title' => 'Alecadd Plugin',
+				'menu_title' => 'Alecadd',
+				'capability' => 'manage_options',
+				'menu_slug' => 'alecadd_plugin',
+				'callback' => function () { echo '<h1>Plugin</h1>'; },
+				'icon_url' => 'dashicons-store',
+				'position' => 110
+			)
+		);
+	}
+
+	/**
+     * Register new pages onto WordPress administration page.
      * 
      * @return void
      */
     public function register() {
-        add_action('admin_menu', array($this, 'add_admin_pages'));
-    }
-
-    /**
-     * Add/register new menu on admin side-bar.
-     * 
-     * @return void
-     */
-    public function add_admin_pages() {
-        add_menu_page(
-            'Custom Admin',
-            'Custom Admin',
-            'manage_options',
-            'custom_admin',
-            array($this, 'admin_index'),
-            'dashicons-store',
-            110
-        );
-    }
-
-    /**
-     * Import template as a view on admin page.
-     * 
-     * @return void
-     */
-    public function admin_index() {
-        require_once $this->plugin_path . 'templates/admin.php';
+    	$this->settings->addPages($this->pages)->register();
     }
 }
