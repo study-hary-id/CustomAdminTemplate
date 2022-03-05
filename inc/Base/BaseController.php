@@ -4,9 +4,9 @@
  * BaseController is an abstraction of Base Class and Pages.
  */
 class BaseController {
-    public $plugin_path;
-    public $plugin_url;
-    public $plugin;
+    public string $plugin_path;
+    public string $plugin_url;
+    public string $plugin;
 
     public function __construct() {
         $this->plugin_path = plugin_dir_path(dirname(__FILE__, 2));
