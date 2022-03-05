@@ -16,8 +16,8 @@ class SettingsLinks extends BaseController {
      * @param array $links  List of necessary links.
      * @return array        Return list after added a new link element.
      */
-    public function settings_link($links) {
-        $settings_link = '<a href="admin.php?page=custom_admin">Settings</a>';
+    public function settings_link(array $links): array {
+        $settings_link = '<a href="admin.php?page=alecadd_plugin">Settings</a>';
         array_push($links, $settings_link);
         return $links;
     }
