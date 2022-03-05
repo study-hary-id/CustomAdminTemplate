@@ -16,7 +16,7 @@ class Admin extends BaseController {
 				'menu_title' => 'Alecadd',
 				'capability' => 'manage_options',
 				'menu_slug' => 'alecadd_plugin',
-				'callback' => function () { echo '<h1>Plugin</h1>'; },
+				'callback' => function () { echo '<h1>Alecadd Plugin</h1>'; },
 				'icon_url' => 'dashicons-store',
 				'position' => 110
 			)
