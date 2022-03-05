@@ -1,11 +1,13 @@
 <?php
 
 require_once PLUGIN_PATH . 'inc/Api/SettingsApi.php';
+require_once PLUGIN_PATH . 'inc/Api/Callbacks/AdminCallbacks.php';
 
 class Admin extends BaseController {
 	public SettingsApi $settings;
 	public array $pages;
 	public array $subpages;
+	public AdminCallbacks $callbacks;
 
 	/**
      * Register new pages onto WordPress administration page.
@@ -13,6 +15,14 @@ class Admin extends BaseController {
      * @return void
      */
     public function register() {
+	    $this->settings = new SettingsApi();
+
+	    $this->callbacks = new AdminCallbacks();
+
+	    $this->setPages();
+
+	    $this->setSubpages();
+
 		$this->settings
 		    ->addPages($this->pages)
 		    ->withSubPage('Dashboard')
