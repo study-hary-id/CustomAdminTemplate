@@ -4,7 +4,8 @@
  * Class SettingsApi is used to add admin menu pages to WordPress.
  */
 class SettingsApi {
-	public array $admin_pages = array();
+	public array $admin_pages;
+	public array $admin_subpages = array(); // Need to assign as empty array because it needs to merge the array.
 
 	/**
 	 * Register all actions and filters on this class to WordPress hooks.
