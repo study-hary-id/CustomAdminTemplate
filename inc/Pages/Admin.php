@@ -5,6 +5,7 @@ require_once PLUGIN_PATH . 'inc/Api/SettingsApi.php';
 class Admin extends BaseController {
 	public SettingsApi $settings;
 	public array $pages;
+	public array $subpages;
 
 	public function __construct() {
 		$this->settings = new SettingsApi();
