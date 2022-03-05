@@ -56,6 +56,10 @@ class Admin extends BaseController {
      * @return void
      */
     public function register() {
-    	$this->settings->addPages($this->pages)->register();
+		$this->settings
+		    ->addPages($this->pages)
+		    ->withSubPage('Dashboard')
+		    ->addSubPages($this->subpages)
+		    ->register();
     }
 }
