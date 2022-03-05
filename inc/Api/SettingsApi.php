@@ -48,4 +48,45 @@ class SettingsApi {
 		$this->admin_pages = $pages;
 		return $this;
 	}
+
+	/**
+	 * Add new subpages to WordPress administration menu.
+	 *
+	 * @param array $pages
+	 *
+	 * @return $this
+	 */
+	public function addSubPages(array $pages): SettingsApi {
+		$this->admin_subpages = array_merge($this->admin_subpages, $pages);
+		return $this;
+	}
+
+	/**
+	 * Add subpage to main custom admin menu.
+	 *
+	 * @param string|null $title
+	 *
+	 * @return $this
+	 */
+	public function withSubPage(string $title = null): SettingsApi {
+		if (empty($this->admin_pages)) {
+			return $this;
+		}
+
+		$admin_page = $this->admin_pages[0];
+
+		$subpage = array(
+			array(
+				'parent_slug' => $admin_page['menu_slug'],
+				'page_title' => $admin_page['page_title'],
+				'menu_title' => $title ? $title : $admin_page['menu_title'],
+				'capability' => $admin_page['capability'],
+				'menu_slug' => $admin_page['menu_slug'],
+				'callback' => $admin_page['callback']
+			)
+		);
+
+		$this->admin_subpages = $subpage;
+		return $this;
+	}
 }
