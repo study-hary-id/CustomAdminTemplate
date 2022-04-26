@@ -27,8 +27,35 @@ class AdminCallbacks extends BaseController
 		return require_once "$this->plugin_path/templates/widget.php";
 	}
 
-	public function alecaddOptionGroup( $input )
+	public function alecaddOptionsGroup( $input )
 	{
 		return $input;
+	}
+
+	public function alecaddAdminSection()
+	{
+		echo 'Hello, there. This is settings.';
+	}
+
+	public function alecaddTextExample()
+	{
+		$value = esc_attr( get_option( 'text_example' ) );
+		echo '<input 
+			type="text" 
+			name="text_example" 
+			value="' . $value . '" 
+			placeholder="Write something here" 
+			class="regular-text">';
+	}
+
+	public function alecaddFirstName()
+	{
+		$value = esc_attr( get_option( 'first_name' ) );
+		echo '<input 
+			type="text" 
+			name="first_name" 
+			value="' . $value . '" 
+			placeholder="Enter your first name" 
+			class="regular-text">';
 	}
 }
