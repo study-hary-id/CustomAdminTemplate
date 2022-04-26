@@ -72,9 +72,7 @@ class Admin extends BaseController
 				'menu_title'  => 'CPT Manager',
 				'capability'  => 'manage_options',
 				'menu_slug'   => 'alecadd_cpt',
-				'callback'    => function () {
-					echo '<h1>Custom Post Type</h1>';
-				}
+				'callback'    => array( $this->callbacks, 'adminCustomPostType' )
 			),
 			array(
 				'parent_slug' => 'alecadd_plugin',
@@ -82,9 +80,7 @@ class Admin extends BaseController
 				'menu_title'  => 'Taxonomies',
 				'capability'  => 'manage_options',
 				'menu_slug'   => 'alecadd_taxonomy',
-				'callback'    => function () {
-					echo '<h1>Taxonomies Manager</h1>';
-				}
+				'callback'    => array( $this->callbacks, 'adminTaxonomy' )
 			),
 			array(
 				'parent_slug' => 'alecadd_plugin',
@@ -92,9 +88,22 @@ class Admin extends BaseController
 				'menu_title'  => 'Widgets',
 				'capability'  => 'manage_options',
 				'menu_slug'   => 'alecadd_widget',
-				'callback'    => function () {
-					echo '<h1>Widgets Manager</h1>';
-				}
+				'callback'    => array( $this->callbacks, 'adminWidget' )
+			)
+		);
+	}
+
+	public function setSettings()
+	{
+		$args = array(
+			array(
+				'option_group' => 'alecadd_option_group',
+				'option_name'  => 'alecadd_text_example',
+				'callback'     => array( $this->callbacks, 'alecaddOptionGroup' )
+			),
+			array(
+				'option_group' => 'alecadd_option_group',
+				'option_name'  => 'first_name',
 			)
 		);
 	}
