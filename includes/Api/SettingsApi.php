@@ -10,6 +10,9 @@ class SettingsApi
 {
 	public $admin_pages;
 	public $admin_subpages = array(); // Need to assign as empty array because it needs to merge the array.
+	public $settings = array();
+	public $sections = array();
+	public $fields = array();
 
 	/**
 	 * Register all actions and filters on this class to WordPress hooks.
@@ -20,6 +23,10 @@ class SettingsApi
 	{
 		if ( ! empty( $this->admin_pages ) ) {
 			add_action( 'admin_menu', array( $this, 'addAdminMenu' ) );
+		}
+
+		if ( ! empty( $this->settings ) ) {
+			add_action( 'admin_init', array( $this, 'registerCustomFields' ) );
 		}
 	}
 
@@ -109,6 +116,58 @@ class SettingsApi
 		);
 
 		$this->admin_subpages = $subpage;
+
+		return $this;
+	}
+
+	public function registerCustomFields()
+	{
+		foreach ( $this->settings as $setting ) {
+			register_setting(
+				$setting['option_group'],
+				$setting['option_name'],
+				isset( $setting['callback'] ) ? $setting['callback'] : ''
+			);
+		}
+
+		foreach ( $this->sections as $section ) {
+			add_settings_section(
+				$section['id'],
+				$section['title'],
+				isset( $section['callback'] ) ? $section['callback'] : '',
+				$section['page']
+			);
+		}
+
+		foreach ( $this->fields as $field ) {
+			add_settings_field(
+				$field['id'],
+				$field['title'],
+				isset( $field['callback'] ) ? $field['callback'] : '',
+				$field['page'],
+				$field['section'],
+				isset( $field['args'] ) ? $field['args'] : ''
+			);
+		}
+	}
+
+	public function setSettings( $settings )
+	{
+		$this->settings = $settings;
+
+		return $this;
+	}
+
+	public function setSections( $sections )
+	{
+		$this->sections = $sections;
+
+		return $this;
+	}
+
+	public function setFields( $fields )
+	{
+		$this->fields = $fields;
 
 		return $this;
 	}
