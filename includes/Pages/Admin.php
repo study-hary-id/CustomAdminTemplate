@@ -31,6 +31,12 @@ class Admin extends BaseController
 
 		$this->setSubpages();
 
+		$this->setSettings();
+
+		$this->setSections();
+
+		$this->setFields();
+
 		$this->settings
 			->addPages( $this->pages )
 			->withSubPage( 'Dashboard' )
@@ -97,14 +103,57 @@ class Admin extends BaseController
 	{
 		$args = array(
 			array(
-				'option_group' => 'alecadd_option_group',
-				'option_name'  => 'alecadd_text_example',
-				'callback'     => array( $this->callbacks, 'alecaddOptionGroup' )
+				'option_group' => 'alecadd_options_group',
+				'option_name'  => 'text_example',
+				'callback'     => array( $this->callbacks, 'alecaddOptionsGroup' )
 			),
 			array(
-				'option_group' => 'alecadd_option_group',
+				'option_group' => 'alecadd_options_group',
 				'option_name'  => 'first_name',
 			)
 		);
+		$this->settings->setSettings( $args );
+	}
+
+	public function setSections()
+	{
+		$args = array(
+			array(
+				'id'       => 'alecadd_admin_index',
+				'title'    => 'Settings',
+				'callback' => array( $this->callbacks, 'alecaddAdminSection' ),
+				'page'     => 'alecadd_plugin'
+			)
+		);
+		$this->settings->setSections( $args );
+	}
+
+	public function setFields()
+	{
+		$args = array(
+			array(
+				'id'       => 'text_example',
+				'title'    => 'Text Example',
+				'callback' => array( $this->callbacks, 'alecaddTextExample' ),
+				'page'     => 'alecadd_plugin',
+				'section'  => 'alecadd_admin_index',
+				'args'     => array(
+					'label_for' => 'text_example',
+					'class'     => 'example-class'
+				)
+			),
+			array(
+				'id'       => 'first_name',
+				'title'    => 'First Name',
+				'callback' => array( $this->callbacks, 'alecaddFirstName' ),
+				'page'     => 'alecadd_plugin',
+				'section'  => 'alecadd_admin_index',
+				'args'     => array(
+					'label_for' => 'first_name',
+					'class'     => 'example-class'
+				)
+			)
+		);
+		$this->settings->setFields( $args );
 	}
 }
