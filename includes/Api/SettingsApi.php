@@ -1,30 +1,36 @@
 <?php
+/**
+ * @package CustomAdmin
+ */
 
 /**
  * Class SettingsApi is used to add admin menu pages to WordPress.
  */
-class SettingsApi {
-	public array $admin_pages;
-	public array $admin_subpages = array(); // Need to assign as empty array because it needs to merge the array.
+class SettingsApi
+{
+	public $admin_pages;
+	public $admin_subpages = array(); // Need to assign as empty array because it needs to merge the array.
 
 	/**
 	 * Register all actions and filters on this class to WordPress hooks.
 	 *
 	 * @return void
 	 */
-	public function register() {
-		if (!empty($this->admin_pages)) {
-			add_action('admin_menu', array($this, 'addAdminMenu'));
+	public function register()
+	{
+		if ( ! empty( $this->admin_pages ) ) {
+			add_action( 'admin_menu', array( $this, 'addAdminMenu' ) );
 		}
 	}
 
 	/**
-	 * Register $admin_pages in to WordPress admin menu.
+	 * Register $admin_pages by executing add_menu_page and add_menu_subpage.
 	 *
 	 * @return void
 	 */
-	public function addAdminMenu() {
-		foreach($this->admin_pages as $page) {
+	public function addAdminMenu()
+	{
+		foreach ( $this->admin_pages as $page ) {
 			add_menu_page(
 				$page['page_title'],
 				$page['menu_title'],
@@ -36,14 +42,14 @@ class SettingsApi {
 			);
 		}
 
-		foreach($this->admin_subpages as $page) {
+		foreach ( $this->admin_subpages as $page ) {
 			add_submenu_page(
 				$page['parent_slug'],
 				$page['page_title'],
 				$page['menu_title'],
 				$page['capability'],
 				$page['menu_slug'],
-				$page['callback'],
+				$page['callback']
 			);
 		}
 	}
@@ -55,8 +61,10 @@ class SettingsApi {
 	 *
 	 * @return $this
 	 */
-	public function addPages(array $pages): SettingsApi {
+	public function addPages( $pages )
+	{
 		$this->admin_pages = $pages;
+
 		return $this;
 	}
 
@@ -67,8 +75,10 @@ class SettingsApi {
 	 *
 	 * @return $this
 	 */
-	public function addSubPages(array $pages): SettingsApi {
-		$this->admin_subpages = array_merge($this->admin_subpages, $pages);
+	public function addSubPages( $pages )
+	{
+		$this->admin_subpages = array_merge( $this->admin_subpages, $pages );
+
 		return $this;
 	}
 
@@ -79,8 +89,9 @@ class SettingsApi {
 	 *
 	 * @return $this
 	 */
-	public function withSubPage(string $title = null): SettingsApi {
-		if (empty($this->admin_pages)) {
+	public function withSubPage( $title = null )
+	{
+		if ( empty( $this->admin_pages ) ) {
 			return $this;
 		}
 
@@ -89,15 +100,16 @@ class SettingsApi {
 		$subpage = array(
 			array(
 				'parent_slug' => $admin_page['menu_slug'],
-				'page_title' => $admin_page['page_title'],
-				'menu_title' => $title ? $title : $admin_page['menu_title'],
-				'capability' => $admin_page['capability'],
-				'menu_slug' => $admin_page['menu_slug'],
-				'callback' => $admin_page['callback']
+				'page_title'  => $admin_page['page_title'],
+				'menu_title'  => $title ? $title : $admin_page['menu_title'],
+				'capability'  => $admin_page['capability'],
+				'menu_slug'   => $admin_page['menu_slug'],
+				'callback'    => $admin_page['callback']
 			)
 		);
 
 		$this->admin_subpages = $subpage;
+
 		return $this;
 	}
 }

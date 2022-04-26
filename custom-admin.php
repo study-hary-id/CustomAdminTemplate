@@ -39,7 +39,7 @@ if ( ! defined('ABSPATH' ) ) {
 
 define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-//require_once PLUGIN_PATH . 'includes/Init.php';
+require_once PLUGIN_PATH . 'includes/Init.php';
 require_once PLUGIN_PATH . 'includes/Base/Activation.php';
 require_once PLUGIN_PATH . 'includes/Base/Deactivation.php';
 
@@ -62,6 +62,6 @@ register_deactivation_hook( __FILE__, 'deactivate_custom_admin' );
 /**
  * Initialize and register all of the services.
  */
-//if ( class_exists( 'Init' ) ) {
-//    Init::register_services();
-//}
+if ( class_exists( 'Init' ) ) {
+    Init::register_services();
+}
