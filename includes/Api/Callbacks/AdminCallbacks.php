@@ -3,7 +3,7 @@
  * @package CustomAdmin
  */
 
-require_once PLUGIN_PATH . 'includes/Base/BaseController.php';
+require_once PLUGIN_PATH . 'includes/Base/class-base-controller.php';
 
 class AdminCallbacks extends BaseController
 {

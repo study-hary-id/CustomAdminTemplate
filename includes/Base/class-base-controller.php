@@ -4,9 +4,9 @@
  */
 
 /**
- * BaseController is an abstraction of Base Class and Pages.
+ * Base_Controller is an abstraction of Base Class and Pages.
  */
-class BaseController
+class Base_Controller
 {
 	public $plugin_path;
 	public $plugin_url;
