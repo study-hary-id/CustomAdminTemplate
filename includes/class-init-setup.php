@@ -3,7 +3,7 @@
  * @package CustomAdmin
  */
 
-require_once PLUGIN_PATH . 'includes/base/BaseController.php';
+require_once PLUGIN_PATH . 'includes/base/class-base-controller.php';
 
 final class InitCustomAdmin
 {
@@ -26,14 +26,7 @@ final class InitCustomAdmin
 	 */
 	public static function get_services()
 	{
-		require_once PLUGIN_PATH . 'includes/Pages/Admin.php';
-//		require_once PLUGIN_PATH . 'includes/Base/Enqueue.php';
-//		require_once PLUGIN_PATH . 'includes/Base/SettingsLinks.php';
-		return [
-			Admin::class,
-//			Enqueue::class,
-//			SettingsLinks::class
-		];
+		return array();
 	}
 
 	/**
