@@ -39,15 +39,15 @@ if ( ! defined('ABSPATH' ) ) {
 
 define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-require_once PLUGIN_PATH . 'includes/Init.php';
-require_once PLUGIN_PATH . 'includes/Base/Activation.php';
-require_once PLUGIN_PATH . 'includes/Base/Deactivation.php';
+require_once PLUGIN_PATH . 'includes/class-init-setup.php';
+require_once PLUGIN_PATH . 'includes/base/class-activation.php';
+require_once PLUGIN_PATH . 'includes/base/class-deactivation.php';
 
 /**
  * Handle activations of the plugin.
  */
 function activate_custom_admin() {
-    Activation::activate();
+    ActivationCustomAdmin::activate();
 }
 register_activation_hook( __FILE__, 'activate_custom_admin' );
 
@@ -55,13 +55,13 @@ register_activation_hook( __FILE__, 'activate_custom_admin' );
  * Handle deactivations of the plugin.
  */
 function deactivate_custom_admin() {
-    Deactivation::deactivate();
+	DeactivationCustomAdmin::deactivate();
 }
 register_deactivation_hook( __FILE__, 'deactivate_custom_admin' );
 
 /**
  * Initialize and register all of the services.
  */
-if ( class_exists( 'Init' ) ) {
-    Init::register_services();
+if ( class_exists( 'InitCustomAdmin' ) ) {
+	InitCustomAdmin::register_services();
 }
