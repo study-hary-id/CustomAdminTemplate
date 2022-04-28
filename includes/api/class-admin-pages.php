@@ -4,8 +4,7 @@
  */
 
 /**
- * Class Admin_Pages handles creation of admin menu,
- * submenu, and it's pages.
+ * Class Admin_Pages creates menu page and submenu page.
  */
 class Admin_Pages
 {
@@ -13,7 +12,9 @@ class Admin_Pages
 	private $admin_subpages = array(); // Need to assign as an empty array because it needs to merge the array.
 
 	/**
-	 * Register all actions and filters to WordPress hooks.
+	 * Register methods to WordPress hooks.
+	 *
+	 * Executes methods on particular WordPress actions and filters.
 	 *
 	 * @return void
 	 */
