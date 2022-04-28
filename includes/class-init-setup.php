@@ -3,20 +3,20 @@
  * @package CustomAdmin
  */
 
-require_once PLUGIN_PATH . 'includes/Base/BaseController.php';
+require_once PLUGIN_PATH . 'includes/base/BaseController.php';
 
-final class Init
+final class InitCustomAdmin
 {
 	/**
 	 * Initialize a class.
 	 *
-	 * @param class  $class     Class from the services array.
-	 * @return class instance   New instance of a given class.
+	 * @param  $class
+	 *
+	 * @return mixed
 	 */
 	private static function instantiate($class)
 	{
-		$service = new $class;
-		return $service;
+		return new $class;
 	}
 
 	/**
