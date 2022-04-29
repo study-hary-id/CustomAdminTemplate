@@ -26,8 +26,14 @@ final class InitCustomAdmin
 	 */
 	public static function get_services()
 	{
+		require_once PLUGIN_PATH . 'includes/base/class-settings-links.php';
+		require_once PLUGIN_PATH . 'includes/base/class-enqueue-script.php';
 		require_once PLUGIN_PATH . 'includes/menu/class-custom-settings-menu.php';
-		return array( Custom_Settings_Menu::class );
+		return array(
+			Settings_Links::class,
+			Enqueue_Script::class,
+			Custom_Settings_Menu::class
+		);
 	}
 
 	/**
