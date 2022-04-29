@@ -39,7 +39,7 @@ class Settings
 	public function register_settings()
 	{
 		foreach ( $this->settings as $setting ) {
-			$callback = isset( $setting['callback'] ) ?: array();
+			$callback = isset( $setting['callback'] ) ? $setting['callback'] : array();
 			register_setting(
 				$setting['option_group'],
 				$setting['option_name'],
@@ -48,7 +48,7 @@ class Settings
 		}
 
 		foreach ( $this->sections as $section ) {
-			$callback = isset( $section['callback'] ) ?: array();
+			$callback = isset( $section['callback'] ) ? $section['callback'] : array();
 			add_settings_section(
 				$section['id'],
 				$section['title'],
@@ -58,8 +58,8 @@ class Settings
 		}
 
 		foreach ( $this->fields as $field ) {
-			$callback = isset( $field['callback'] ) ?: array();
-			$args = isset( $field['args'] ) ?: array();
+			$callback = isset( $field['callback'] ) ? $field['callback'] : array();
+			$args = isset( $field['args'] ) ? $field['args'] : array();
 			add_settings_field(
 				$field['id'],
 				$field['title'],
