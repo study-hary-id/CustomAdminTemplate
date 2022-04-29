@@ -26,7 +26,8 @@ final class InitCustomAdmin
 	 */
 	public static function get_services()
 	{
-		return array();
+		require_once PLUGIN_PATH . 'includes/menu/class-custom-settings-menu.php';
+		return array( Custom_Settings_Menu::class );
 	}
 
 	/**
